@@ -2,13 +2,13 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "library_management";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=blog_system", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
 }
 ?>

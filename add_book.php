@@ -19,17 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            background-color:lightgreen;
-            text-align:center;
-            background-image: url('image2.jpg');
-            background-size: cover; /* Make the background cover the entire area */
-            background-repeat: no-repeat; /* Prevent the background from repeating */
-            
-        }
-        
-    </style>
+<link rel="stylesheet" href="style.css">
     <title>Add Book</title>
 </head>
 <body>

@@ -2,12 +2,38 @@
 <html>
 <head>
     <title>Wisdom Woods Library</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
-<nav>
-    <button>login</button>
-    <button>register</button>
-</nav>
+
+<header>
+
+  <div class="main">
+ 
+    <nav class="navr navr-inverse1">
+      <div class="navdiv1">
+        <div class="logo">
+          <a href="#">Wisdom Woods Library</a>
+        </div>
+      
+
+<ul class="nav nav-underline">
+          <li class="nav-item"><a  class="nav-link active" aria-current="page" href="index.php">Home</a></li>
+          <li id="login" class="nav-item"><a class="nav-link" href="login.php">Log In</a></li>
+          <li id="register" class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="add_book.php">Add Book</a></li>
+          <li class="nav-item"><a class="nav-link" href="brrow_book.php">Brrow Book</a></li>
+          <li class="nav-item"><a class="nav-link" href="view_book.php">View Book</a></li>
+          <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
+         
+          <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</header>
+
 <body>
     
     <h1>Wisdom Woods Library</h1><br><br>

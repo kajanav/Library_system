@@ -27,16 +27,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            background-color:lightgreen;
-            text-align:center;
-            background-image: url('image1.jpg');
-            background-size: cover; /* Make the background cover the entire area */
-            background-repeat: no-repeat; /* Prevent the background from repeating */
-        }
-        
-    </style>
+    
     <title>Return Book</title>
 </head>
 <body>

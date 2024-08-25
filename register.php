@@ -51,7 +51,7 @@ exit;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>User Register</title>
 </head>
 <header>
@@ -60,7 +60,7 @@ exit;
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
                 <div class="logo">
-                    <a href="#">BlogHub</a>
+                    <a href="#">Wisdom Woods Library</a>
                 </div>
                 <ul>
 
