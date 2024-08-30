@@ -1,5 +1,6 @@
 const form = document.querySelector('#form')
 const username = document.querySelector('#username');
+const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 
 form.addEventListener('submit', (e) => {
@@ -11,6 +12,7 @@ form.addEventListener('submit', (e) => {
 
 function validateInputs() {
     const usernameVal = username.value.trim()
+    const emailVal = email.value.trim()
     const passwordVal = password.value.trim();
     let success = true
 
@@ -19,6 +21,17 @@ function validateInputs() {
         setError(username, 'Username is required')
     } else {
         setSuccess(username)
+    }
+
+    // Email validation
+    if (emailVal === '') {
+        success = false;
+        setError(email, 'Email is required');
+    } else if (!isValidEmail(emailVal)) {
+        success = false;
+        setError(email, 'Please provide a valid email');
+    } else {
+        setSuccess(email);
     }
 
 
@@ -34,6 +47,12 @@ function validateInputs() {
     return success;
 
 }
+// Email validation function (simple regex check)
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+}
+
 //element - password, msg- pwd is reqd
 function setError(element, message) {
     const inputGroup = element.parentElement;

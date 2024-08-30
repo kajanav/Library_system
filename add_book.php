@@ -22,15 +22,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <link rel="stylesheet" href="style.css">
     <title>Add Book</title>
 </head>
+<header>
+
+  <div class="main">
+    <nav class="navr navr-inverse1">
+      <div class="navdiv1">
+        <div class="logo">
+          <a href="#">Wisdom Woods Library</a>
+        </div>
+        <ul>
+
+          <li><a href="index.php"><span class=""></span><button type="button" class=""> Home</button></a></li>
+          <li><a href="login.php"><span class=""></span><button type="button" class="active-btn">Log In</button></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</header>
 <body>
+  <div class="container">
+  <?php require_once 'message.php'; ?>
+    <form action="add_book.php" id="form" method="POST" onsubmit="return validateForm()">
+      <h1>Add a new book</h1>
+      <div class="input-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter Title" >
+        <div class="error"></div>
+        </div>
+        <div class="input-group">
+        <label for="auther">Author</label>
+        <input type="text" id="auther" name="name" placeholder="Enter Auther" >
+        <div class="error"></div>
+        </div>
+        <div class="input-group">
+        <label for="year">Year</label>
+        <input type="number" id="username" name="year" placeholder="Enter/Select year" >
+        <div class="error"></div>
+        </div>
+        <button type="submit">Add Book</button>
        
-                <h1> Add a new book</h1><br><br>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
-                <h2>Title:   </h2><input type="text" name="title" required><br><br>
-                <h2>Author:   </h2><input type="text" name="author" required><br><br>
-                <h2> Year:   </h2><input type="number" name="year" required><br><br><br><br><br>
-                <input type="submit" value="Add Book">
-                </form>
-             
+    </form>
+  </div>
+  <footer class="footer">
+    Developed By:20APSE4878 Kajana.V
+  </footer>
 </body>
+
 </html>

@@ -27,13 +27,13 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-    
     <title>Return Book</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Return a book</h1><br><br>
+    <h1>Return a book</h1>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-        <h2>Borrower:</h2> 
+        <h2>Borrower</h2> 
         <select name="borrower_id" required>
             <?php
             if ($result->num_rows > 0) {
@@ -44,7 +44,7 @@ $result = $conn->query($sql);
                 echo "<option value=''>No borrowed books</option>";
             }
             ?>
-        </select><br><br>
+        </select>
         <input type="submit" value="Return Book">
     </form>
 </body>

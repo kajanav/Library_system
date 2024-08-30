@@ -82,6 +82,12 @@ exit;
                 <label for="username">Username</label>
                 <input type="text" id="username" name="uname" placeholder="Enter Username" >
                 <div class=" error "></div>
+                </div>
+                <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" id=email" name="email" placeholder="Enter Email" >
+                <div class=" error "></div>
+                </div>
                 <div class="input-group ">
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password1" placeholder="Enter Password" >

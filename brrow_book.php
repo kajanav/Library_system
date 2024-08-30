@@ -7,14 +7,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $borrow_date = date('Y-m-d');
     $return_date = date('Y-m-d', strtotime('+14 days'));
 
-    $sql = "INSERT INTO borrowers (name, book_id, borrow_date, return_date) VALUES ('$name', '$book_id', '$borrow_date', '$return_date')";
-    
-    if ($conn->query($sql) === TRUE) {
-        $update_sql = "UPDATE books SET available = FALSE WHERE id = $book_id";
-        $conn->query($update_sql);
-        echo "Book borrowed successfully";
+    // Check if the selected book exists and is available
+    $check_sql = "SELECT * FROM books WHERE id = ? AND available = TRUE";
+    $stmt = $conn->prepare($check_sql);
+    $stmt->bind_param('i', $book_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Insert into borrowers table
+        $sql = "INSERT INTO borrowers (name, book_id, borrow_date, return_date) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('siss', $name, $book_id, $borrow_date, $return_date);
+
+        if ($stmt->execute()) {
+            // Update the book to mark it as not available
+            $update_sql = "UPDATE books SET available = FALSE WHERE id = ?";
+            $update_stmt = $conn->prepare($update_sql);
+            $update_stmt->bind_param('i', $book_id);
+            $update_stmt->execute();
+
+            echo "Book borrowed successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "The selected book is either not available or does not exist.";
     }
 }
 
@@ -25,26 +43,52 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-    
     <title>Borrow Book</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<header>
+    <div class="main">
+        <nav class="navr navr-inverse1">
+            <div class="navdiv1">
+                <div class="logo">
+                    <a href="#">Wisdom Woods Library</a>
+                </div>
+                <ul>
+                    <li><a href="index.php"><button type="button">Home</button></a></li>
+                    <li><a href="login.php"><button type="button" class="active-btn">Log In</button></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
 <body>
-    <h1>Borrow a book</h1><br><br><br><br>
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-       <h3> Name: </h3><input type="text" name="name" required><br><br><br>
-        <h3>Book: </h3>
-        <select name="book_id" required>
-            <?php
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<option value='".$row['id']."'>".$row['title']."</option>";
+<div class="container">
+    <?php require_once 'message.php'; ?>
+    <form action="brrow_book.php" id="form" method="POST" onsubmit="return validateForm()">
+        <h1>Borrow a book</h1>
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter Name" required>
+        </div>
+        <div class="input-group">
+            <label for="book_id">Book</label>
+            <select name="book_id" id="book_id" required>
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='".$row['id']."'>".$row['title']."</option>";
+                    }
+                } else {
+                    echo "<option value=''>No books available</option>";
                 }
-            } else {
-                echo "<option value=''>No books available</option>";
-            }
-            ?>
-        </select><br><br>
-        <input type="submit" value="Borrow Book">
+                ?>
+            </select>
+        </div>
+        <button type="submit">Borrow Book</button>
     </form>
+</div>
+<footer class="footer">
+    Developed By:20APSE4878 Kajana.V
+</footer>
 </body>
 </html>
