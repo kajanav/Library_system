@@ -65,11 +65,11 @@
       <div class="input-group">
         <label for="username">Username</label>
         <input type="text" id="username" name="uname" placeholder="Enter Username" >
-        <div class="error"></div>
+        <div id="usernameError" class="error"></div>
         <div class="input-group ">
           <label for="password">Password</label>
           <input type="password" id="password" name="password1" placeholder="Enter Password" >
-          <div class="error"></div>
+          <div id="passwordError" class="error"></div>
         </div>
         <button type="submit">Login</button>
         <br><br>
