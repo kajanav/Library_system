@@ -36,6 +36,7 @@ $books = $statement->fetchAll();
                 <ul class="nav nav-underline">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="view_book.php">View Book</a></li>
                     <li class="nav-item"><a class="nav-link" href="browse_books.php">Browse Books</a></li>
                     <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
                     <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
