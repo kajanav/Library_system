@@ -32,13 +32,6 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <ul class="nav nav-underline">
           <li class="nav-item"><a  class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-          <li id="login" class="nav-item"><a class="nav-link" href="login.php">Log In</a></li>
-          <li id="register" class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
-          <li class="nav-item"><a class="nav-link" href="add_book.php">Add Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="brrow_book.php">Brrow Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="view_book.php">View Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
-         
           <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
         </ul>
       </div>
@@ -60,9 +53,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </thead>
         <tbody>
             <?php
-            // Check if any books were returned by the query
+            
             if (count($books) > 0) {
-                // Loop through each book and display its details in a table row
+                
                 foreach ($books as $row) {
                     echo "<tr>
                             <td>".$row['id']."</td>
@@ -73,11 +66,14 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                           </tr>";
                 }
             } else {
-                // Display a message if no books are found
+            
                 echo "<tr><td colspan='5'>No books found</td></tr>";
             }
             ?>
         </tbody>
     </table>
 </body>
+<footer class="footer">
+Software Testing - Group 06
+</footer>
 </html>

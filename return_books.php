@@ -48,4 +48,7 @@ $result = $conn->query($sql);
         <input type="submit" value="Return Book">
     </form>
 </body>
+<footer class="footer">
+Software Testing - Group 06
+</footer>
 </html>

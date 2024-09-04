@@ -33,6 +33,6 @@
 </div>
 </body>
 <footer class="footer">
-    Developed By:20APSE4878 Kajana.V
+Software Testing - Group 06
   </footer>
 </html>
