@@ -54,12 +54,12 @@ $books = $statement->fetchAll();
         <div class="user-info">
             <h2><?php echo $username; ?> </h2>
         </div>
-        <a href="add_book.php"> <button class="create-post-btn">Add</button></a> 
+        <a href="add_book.php"> <button class="create-post-btn">Add Book</button></a> 
     </div>
 <?php endif; ?>
 
 <div class="cards">
-    <h2>Available Books:</h2>
+    <h1>Available Books</h1>
     <?php foreach ($books as $book) : ?>
         <article class="card">
             <header>
