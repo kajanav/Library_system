@@ -4,16 +4,9 @@
         padding: 0px;
         font-family: century;
     }
-    .main{
-        background: url(Assets/library.jpg);
-        width:100%;
-        background-position:center;
-        height:109vh
-
-    }
 
     .navr {
-        background: #041e4efe;
+        background: #000421;
         font-family: calibri;
         padding-right: 15px;
         padding-left: 15px;
@@ -52,11 +45,8 @@
         color: #fff;
     }
     body {
-            margin: 0;
-            padding: 0;
-            color: #333;
-           
-            background-size: cover;
+        background: url(https://media.istockphoto.com/id/1015858744/photo/image-of-open-antique-book-on-wooden-table.jpg?s=612x612&w=0&k=20&c=hSSyzJ1eVqE1IWfvdkGHIKZ9rMEdB3BG1jHqPdU9irw=)no-repeat center center fixed;
+        background-size: cover;
         }
     
     
@@ -135,7 +125,7 @@
   footer {
       text-align: center;
       padding: 3px;
-      background-color: #041e4efe;
+      background-color: #000421;
       color: white;
 
   }
@@ -268,7 +258,7 @@
     width: 1200px;
     height: auto;
     margin: auto;
-    color: #0e28ed;
+    color: #fafafa;
     position: relative;
 }
 
@@ -291,7 +281,7 @@
 .content .cn{
     width: 160px;
     height: 40px;
-    /* background: #ff7200; */
+   background: #ff7200; 
     border: none;
     margin-bottom: 10px;
     margin-left: 20px;
