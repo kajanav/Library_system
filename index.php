@@ -16,10 +16,6 @@
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
           <li id="login" class="nav-item"><a class="nav-link" href="login.php">Log In</a></li>
           <li id="register" class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
-          <li class="nav-item"><a class="nav-link" href="add_book.php">Add Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="borrow_book.php">Borrow Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="view_book.php">View Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
           <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
         </ul>
       </div>
