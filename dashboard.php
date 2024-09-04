@@ -8,12 +8,9 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-// Check if the user is admin or regular user
-$is_admin = $_SESSION['role'] === 'admin';
+// Check if the user is an admin
+$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 $username = $_SESSION['username'];
-session_start(); // Ensure session is started
-
-
 
 $query = "SELECT books.id, books.title, books.author, books.year, books.available FROM books ORDER BY books.id DESC";
 $statement = $conn->prepare($query);
@@ -36,15 +33,12 @@ $books = $statement->fetchAll();
                 <div class="logo">
                     <a href="#">Wisdom Woods Library</a>
                 </div>
-                <ul>
-                    <li><a href="index.php"><button type="button">Home</button></a></li>
-                    <li><a href="dashboard.php"><button type="button" class="active-btn">Dashboard</button></a></li>
-                    <?php if ($is_admin): ?>
-                        <li><a href="add_book.php"><button type="button">Add Book</button></a></li>
-                    <?php endif; ?>
-                    <li><a href="browse_books.php"><button type="button">Browse Books</button></a></li>
-                    <li><a href="return_books.php"><button type="button">Return Book</button></a></li>
-                    <li><a href="logout.php"><button type="button">Logout</button></a></li>
+                <ul class="nav nav-underline">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse_books.php">Browse Books</a></li>
+                    <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
+                    <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -52,14 +46,15 @@ $books = $statement->fetchAll();
 </header>
 
 <body>
-<h1>WELCOME TO <?php echo $username; ?>!</h1>
+<h1>WELCOME <?php echo $username; ?>!</h1>
 
-<?php if ($is_admin): ?>
+<!-- Display only if the user is not an admin -->
+<?php if (!$is_admin): ?>
     <div class="user-card">
         <div class="user-info">
-            <h2><?php echo $username; ?> (Admin)</h2>
+            <h2><?php echo $username; ?> </h2>
         </div>
-        <a href="add_book.php"> <button class="create-post-btn">Add Book</button></a> 
+        <a href="add_book.php"> <button class="create-post-btn">Add</button></a> 
     </div>
 <?php endif; ?>
 

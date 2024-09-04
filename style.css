@@ -131,14 +131,15 @@
       background-color: #041e4efe;
       color: white;
   }
-  footer p {
+  /* footer p {
       color: rgb(131, 199, 198);
       padding: 25px;
   }
   .footer {
-      height: 50px;
+    
       flex-shrink: 0;
-  }
+      display: block;
+  } */
   #form,
   #postForm {
       width: 400px;

@@ -62,10 +62,9 @@ exit;
                 <div class="logo">
                     <a href="#">Wisdom Woods Library</a>
                 </div>
-                <ul>
-
-                    <li><a href="index.php"><span class=""></span><button type="button" class=""> Home</button></a></li>
-                    <li><a href="login.php"><span class=""></span><button type="button" class="">Log In</button></a></li>
+                <ul class="nav nav-underline">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
+          <li id="login" class="nav-item"><a class="nav-link" href="login.php">Log In</a></li>
                 </ul>
             </div>
         </nav>

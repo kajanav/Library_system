@@ -29,7 +29,7 @@
             <h1>Welcome to <br><span>Wisdom Woods Library</span> </h1>
             <p class="par"> At Wisdom Woods Library, we believe in making library management as efficient and user-friendly as possible. <br>Our comprehensive Library Management System is designed to simplify every aspect of library operations, <br>from managing memberships to tracking inventory.</p>
 
-                <button class="cn"><a href="#">JOIN US</a></button>
+                <button class="cn"><a href="login.php">JOIN US</a></button>
 </div>
 </body>
 <footer class="footer">
