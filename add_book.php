@@ -2,11 +2,6 @@
 include 'db.php';
 session_start();
 
-// Ensure that the user is an admin
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: dashboard.php");
-    exit;
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'] ?? '';  // Ensure title is set
@@ -41,6 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Add Book</title>
 </head>
@@ -61,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <body>
 <div class="container">
+
     <form action="add_book.php" method="POST">
         <h1>Add a new book</h1>
         <div class="input-group">
@@ -75,6 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="year">Year</label>
             <input type="number" id="year" name="year" placeholder="Enter/Select Year" required>
         </div>
+        <div class="input-group">
+        <label for="pdf">Upload PDF</label>
+                <input type="file" id="pdf" name="pdf" accept=".pdf">
+                </div>
         <button type="submit">Add Book</button>
     </form>
 </div>

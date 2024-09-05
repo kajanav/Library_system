@@ -58,7 +58,7 @@ $books = $statement->fetchAll();
         <a href="add_book.php"> <button class="create-post-btn">Add Book</button></a> 
     </div>
 <?php endif; ?>
-
+<div style="min-height: 400px;">
 <div class="cards">
     <h1>Available Books</h1>
     <?php foreach ($books as $book) : ?>
@@ -74,7 +74,7 @@ $books = $statement->fetchAll();
         </article>
     <?php endforeach; ?>
 </div>
-
+</div>
 <footer class="footer">
 Software Testing - Group 06
 </footer>
