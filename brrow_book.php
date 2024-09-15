@@ -44,15 +44,15 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Borrow Book</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
 <header>
     <div class="main">
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
-                <div class="logo">
-                    <a href="#">Wisdom Woods Library</a>
-                </div>
+            <div class="logo">
+          <h2>Wisdom Woods Library</h2>
+        </div>
                 <ul>
                     <li><a href="index.php"><button type="button">Home</button></a></li>
                     <li><a href="login.php"><button type="button" class="active-btn">Log In</button></a></li>

@@ -26,7 +26,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav class="navr navr-inverse1">
       <div class="navdiv1">
         <div class="logo">
-          <a href="#">Wisdom Woods Library</a>
+          <h2>Wisdom Woods Library</h2>
         </div>
       
 

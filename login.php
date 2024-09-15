@@ -34,7 +34,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style1.css">
   
   <title>Login</title>
 </head>
@@ -43,8 +43,8 @@
   <div class="main">
     <nav class="navr navr-inverse1">
       <div class="navdiv1">
-        <div class="logo">
-          <a href="#">Wisdom Woods Library</a>
+      <div class="logo">
+          <h2>Wisdom Woods Library</h2>
         </div>
         <ul class="nav nav-underline">
 

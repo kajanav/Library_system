@@ -1,6 +1,6 @@
 <?php
 include 'db.php';
-session_start();
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,19 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
     <title>Add Book</title>
 </head>
 <header>
     <div class="main">
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
-                <div class="logo">
-                    <a href="#">Wisdom Woods Library</a>
-                </div>
-                <ul>
-                    <li><a href="index.php"><button type="button"> Home</button></a></li>
-                    <li><a href="login.php"><button type="button" class="active-btn">Log In</button></a></li>
+            <div class="logo">
+          <h2>Wisdom Woods Library</h2>
+        </div>
+                <ul class="nav nav-underline">
+                    <li class="nav-item"><a href="dashboard.php"><button type="button"> Home</button></a></li>
+                    <!-- <li><a href="login.php"><button type="button" class="active-btn">Log In</button></a></li> -->
                 </ul>
             </div>
         </nav>
@@ -58,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 <body>
 <div class="container">
-
-    <form action="add_book.php" method="POST">
+<?php require_once 'message.php'; ?>
+    <form action="add_book.php" id="form" method="POST" onsubmit="return validateForm()">
         <h1>Add a new book</h1>
         <div class="input-group">
             <label for="title">Title</label>
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="input-group">
         <label for="pdf">Upload PDF</label>
                 <input type="file" id="pdf" name="pdf" accept=".pdf">
-                </div>
+        </div>
         <button type="submit">Add Book</button>
     </form>
 </div>
@@ -84,4 +84,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 Software Testing - Group 06
 </footer>
 </body>
+<script src="./js/script1.js"></script>
 </html>
