@@ -47,7 +47,8 @@ try {
         title VARCHAR(255) NOT NULL,
         author VARCHAR(255) NOT NULL,
         year INT NOT NULL,
-        available BOOLEAN DEFAULT TRUE
+        available BOOLEAN DEFAULT TRUE,
+        pdf VARCHAR(255) NULL 
     )";
     $conn->exec($sql);
 

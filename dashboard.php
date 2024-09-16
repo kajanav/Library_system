@@ -12,12 +12,12 @@ if (!isset($_SESSION['username'])) {
 $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 $username = $_SESSION['username'];
 
-$query = "SELECT books.id, books.title, books.author, books.year, books.available FROM books ORDER BY books.id DESC";
+$query = "SELECT books.id, books.title, books.author, books.year, books.available, books.pdf FROM books ORDER BY books.id DESC";
 $statement = $conn->prepare($query);
 $statement->execute();
 $books = $statement->fetchAll();
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +48,14 @@ $books = $statement->fetchAll();
 
 <body>
 <h1>WELCOME <?php echo $username; ?>!</h1>
+<!-- Display success or error messages -->
+<?php if (isset($_GET['message'])): ?>
+    <p class="success"><?php echo htmlspecialchars($_GET['message']); ?></p>
+<?php endif; ?>
 
+<?php if (isset($_GET['error'])): ?>
+    <p class="error"><?php echo htmlspecialchars($_GET['error']); ?></p>
+<?php endif; ?>
 <!-- Display only if the user is not an admin -->
 <!-- <?php if (!$is_admin): ?> -->
     <div class="user-card">
@@ -71,18 +78,32 @@ $books = $statement->fetchAll();
                 <p><strong>Author:</strong> <?php echo $book['author']; ?></p>
                 <p><strong>Year:</strong> <?php echo $book['year']; ?></p>
                 <p><strong>Available:</strong> <?php echo $book['available'] ? 'Yes' : 'No'; ?></p>
+                
+                <!-- Display PDF link if it exists -->
+                <?php if (!empty($book['pdf'])): ?>
+                    <p><strong>PDF:</strong> <a href="uploads/<?php echo htmlspecialchars($book['pdf']); ?>" target="_blank">View PDF</a></p>
+                <?php else: ?>
+                    <p><strong>PDF:</strong> Not available</p>
+                <?php endif; ?>
                
             </div>
             <div class="field btns">
-            <button href="add_book.php">Edit Book</button>
-          <button href="delete.php">Delete Book</button>
+            <a href="subdir/edit_book.php?id=<?php echo $book['id']; ?>">
+    <button class="create-post-btn">Edit Book</button>
+</a>
+
+
+                <a href="delete_book.php?id=<?php echo $book['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?');">
+             <button class="create-post-btn">Delete Book</button>
+</a>
+
             </div>
         </article>
     <?php endforeach; ?>
 </div>
 </div>
 <footer class="footer">
-Software Testing - Group 06
+    Software Testing - Group 06
 </footer>
 </body>
 </html>
