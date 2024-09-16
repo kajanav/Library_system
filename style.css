@@ -1,120 +1,273 @@
-*{
+/* General body styling */
+body {
+  font-family: 'Times New Roman', sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.main{
-  width: 100%;
+  background-color: #fff;
+  color: #333;
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  height: cover;
 }
 
-.navr {
+/* Header Styling */
+header {
   background: #060f1efe;
-  font-family: calibri;
-  padding-right: 15px;
-  padding-left: 15px;
- 
-  height: 75px;
-  margin: auto;
+        padding-right: 15px;
+        padding-left: 15px;
+        height: 75px;
+        margin: auto;
 }
-
-
-
-.logo{
-  color: #ff7200;
-  font-size: 35px;
-  font-family: Arial;
-  padding-left: 20px;
-  float: left;
-  padding-top: 10px;
-  margin-top: 5px
+.navdiv1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
-
-.menu{
-  width: 400px;
-  float: left;
-  height: 70px;
-}
-
 ul{
   float: left;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 ul li{
   list-style: none;
   margin-left: 62px;
   margin-top: 27px;
   font-size: 14px;
 }
-
 ul li a{
   text-decoration: none;
   color: #fff;
-  font-family: Arial;
+  font-family: 'Times New Roman';
   font-weight: bold;
+  font-size: 18px;
   transition: 0.4s ease-in-out;
 }
 
-ul li a:hover{
-  color: #ff7200;
+header h2 {
+  margin: 10px 0;
+  font-size: 36px;
+  color: #ff6600; /* Secondary heading also in orange */
 }
-
-.content{
-  width: 1200px;
-  height: auto;
-  margin: auto;
-  color: #fff;
-  position: relative;
-}
-
-.content .par{
-  padding-left: 20px;
-  padding-bottom: 25px;
-  font-family: Arial;
-  letter-spacing: 1.2px;
-  line-height: 30px;
-}
-
-.content h1{
-  font-family: 'Times New Roman';
-  font-size: 50px;
-  padding-left: 20px;
-  margin-top: 9%;
-  letter-spacing: 2px;
-}
-
-.content .cn{
-  width: 160px;
-  height: 40px;
-  background: #ff7200;
-  border: none;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: .4s ease;
-  
-}
-
-.content .cn a{
-  text-decoration: none;
+h1 {
+  text-align: center;
   color: #000;
-  transition: .3s ease;
-}
-
-.cn:hover{
-  background-color: #fff;
+  margin: 40px;
 }
 
 .content span{
   color: #ff7200;
   font-size: 65px
 }
+ .content p {
+        color: black;
+        text-align: center;
+        font-family: 'Times New Roman';
 
 
+    }
+    .content .par{
+      padding-left: 20px;
+      padding-bottom: 25px;
+      font-family: Arial;
+      letter-spacing: 1.2px;
+      line-height: 30px;
+    }
+    .content h1{
+      font-family: 'Times New Roman';
+      font-size: 50px;
+      padding-left: 20px;
+      margin-top: 5%;
+      letter-spacing: 2px;
+    }
+    .content .cn{
+      width: 160px;
+      height: 40px;
+      background: #ff7200;
+      border: none;
+      position: absolute;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: .4s ease;
+      left: 70%;
+      
+    }
+    .content .cn a{
+      text-decoration: none;
+      color: #000;
+      transition: .3s ease;
+      
+    }
+    .cn:hover{
+        background-color: #fff;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    .input-group input {
+        border-radius: 5px;
+        font-size: 20px;
+        margin-top: 3px;
+        padding: 10px;
+        border: 1px solid #041e4efe;
+    }
+    .input-group input:focus {
+      outline: 0;
+  }
+  .input-group.error {
+      color: rgb(242, 18, 18);
+      font-size: 16px;
+      margin-top: 5px;
+  }
+  .error-message {
+      color: red;
+  }
+  .input-group.success input {
+      border-color: #0cc477;
+  }
+  .input-group.error input {
+      border-color: rgb(206, 67, 67);
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+}
+#form,
+#postForm {
+    width: 400px;
+    margin: 20vh auto 20vh auto;
+    background-color: rgb(235, 240, 246);
+    border-radius: 5px;
+    padding: 30px;
+}
+
+#form button,
+#postForm button {
+  background: #ff7200;
+    color: white;
+    border: 1px solid#000;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px 0px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+}
+
+.user-card {
+  width: 400px;
+  margin: 10vh auto 20vh auto;
+  background-color: rgb(235, 240, 246);
+  border-radius: 5px;
+  padding: 20px;
+}
+.user-info-and-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Main Content Styling */
+main {
+  text-align: center;
+  padding: 50px 20px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  margin: 30px;
+}
+.card {
+  display: grid;
+  grid-template-rows: max-content 200px 1fr;
+  width: 400px;
+  margin: 10vh auto 10vh auto;
+  background-color: rgb(235, 240, 246);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+/* Button Styling */
+button {
+  background-color: #ff6600; /* Matching the orange theme */
+  border: none;
+  color: white;
+  padding: 15px
+  30px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e65c00; /* Slightly darker orange on hover */
+}
+
+/* Footer Styling */
+footer {
+  background-color: #0c0c2c; /* Dark background for the footer */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+h3{
+  font-size: 24px;
+  color: #0c0c2c;
+  text-align: center;
+}
+
+.create-post-btn {
+  background-color: #e65c00;;
+  color: white;
+  border: 2px solid #0c0c2c;
+  border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 50%;
+  
+}
+.create-post-btn:focus {
+  background-color: white;
+}
+.active-btn {
+  background-color:white !important;
+}
+.card .btns button{
+  margin-top: -20px!important;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  header h1 {
+      font-size: 36px;
+  }
+
+  header h2 {
+      font-size: 28px;
+  }
+
+  main h3 {
+      font-size: 28px;
+  }
+
+  button {
+      padding: 10px 20px;
+      font-size: 16px;
+  }
+
+  main p {
+      font-size: 16px;
+  }
+}

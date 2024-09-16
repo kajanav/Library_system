@@ -23,7 +23,7 @@ $books = $statement->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <title>Dashboard</title>
 </head>
 <header>
@@ -60,7 +60,7 @@ $books = $statement->fetchAll();
 <!-- <?php if (!$is_admin): ?> -->
     <div class="user-card">
         <div class="user-info">
-            <h2><?php echo $username; ?> </h2>
+            <h3><?php echo $username; ?> </h3>
         </div>
         <a href="add_book.php"> <button class="create-post-btn">Add Book</button></a> 
     </div>
@@ -71,9 +71,9 @@ $books = $statement->fetchAll();
     
     <?php foreach ($books as $book) : ?>
         <article class="card">
-            <header>
+            
                 <h3><?php echo $book['title']; ?></h3>
-            </header>
+            
             <div class="content">
                 <p><strong>Author:</strong> <?php echo $book['author']; ?></p>
                 <p><strong>Year:</strong> <?php echo $book['year']; ?></p>
@@ -88,7 +88,7 @@ $books = $statement->fetchAll();
                
             </div>
             <div class="field btns">
-            <a href="subdir/edit_book.php?id=<?php echo $book['id']; ?>">
+            <a href="edit_book.php?id=<?php echo $book['id']; ?>">
     <button class="create-post-btn">Edit Book</button>
 </a>
 

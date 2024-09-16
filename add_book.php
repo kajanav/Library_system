@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
     <title>Add Book</title>
 </head>
 <header>
@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <h2>Wisdom Woods Library</h2>
         </div>
                 <ul class="nav nav-underline">
-                    <li class="nav-item"><a href="dashboard.php"><button type="button"> Home</button></a></li>
-                    <!-- <li><a href="login.php"><button type="button" class="active-btn">Log In</button></a></li> -->
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="dashboard.php">Home</a></li>
+                <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
                 </ul>
             </div>
         </nav>
