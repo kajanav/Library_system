@@ -62,6 +62,8 @@ try {
         FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE SET NULL
     )";
     $conn->exec($sql);
+   
+
 
     echo "Tables created successfully";
 } catch (PDOException $e) {

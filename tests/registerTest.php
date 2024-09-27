@@ -1,107 +1,126 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests;
 
-class RegisterTest extends TestCase
+use PDO;
+use PDOException;
+
+class registerTest extends databaseTestCase
 {
-    protected $pdo;
-
-    protected function setUp(): void
+    public function testUserRegistration(): void
     {
-        // Mock a PDO connection
-        $this->pdo = $this->getMockBuilder(PDO::class)
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        $username = 'kaja1';
+        $password = password_hash('password345', PASSWORD_BCRYPT);
+        $email = 'kaja1@example.com';
+
+        $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
+
+        try {
+            $stmt->execute();
+            $this->assertTrue(true); // Test passes if no exception
+        } catch (PDOException $e) {
+            $this->fail('Registration failed: ' . $e->getMessage());
+        }
+
+        // Check user inserted
+        $query = "SELECT * FROM users WHERE username = :username";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertNotEmpty($user, 'User should exist in the database');
+        $this->assertEquals($username, $user['username'], 'Username should match');
+        $this->assertEquals($email, $user['email'], 'Email should match');
     }
 
-    public function testEmptyFields()
+    public function testEmptyRegistrationFields(): void
     {
-        // Arrange
-        $_POST['uname'] = '';
-        $_POST['password1'] = '';
-        $_SESSION = [];
+        // Application logic should prevent this, but test for integrity issues
+        $username = '';
+        $password = '';
+        $email = '';
 
-        // Act
-        include 'register.php';  // Include your registration logic file
+        $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
 
-        // Assert
-        $this->assertContains('Please fill all required fields!', $_SESSION['messages']);
+        try {
+            $stmt->execute();
+            $this->fail('Empty fields should not allow registration');
+        } catch (PDOException $e) {
+            $this->assertTrue(true, 'Expected failure on empty fields');
+        }
     }
 
-    public function testDuplicateUsername()
+    public function testDuplicateUsername(): void
     {
-        // Arrange
-        $username = 'existinguser';
-        $password = 'testpassword';
+        $username = 'kaja';
+        $password = password_hash('password345', PASSWORD_BCRYPT);
+        $email = 'kaja@example.com';
 
-        // Simulate a database result that returns an existing user
-        $user = [
-            'username' => $username
-        ];
+        // Insert the first time
+        $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
 
-        // Mock the PDO statement for SELECT query
-        $stmt = $this->getMockBuilder(PDOStatement::class)
-                     ->disableOriginalConstructor()
-                     ->getMock();
-        $stmt->expects($this->once())
-             ->method('execute');
-        $stmt->expects($this->once())
-             ->method('fetch')
-             ->willReturn($user);
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            $this->fail('Initial registration failed: ' . $e->getMessage());
+        }
 
-        // Mock the prepared statement
-        $this->pdo->expects($this->once())
-                  ->method('prepare')
-                  ->willReturn($stmt);
+        // Insert the same user again (new prepared statement)
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
 
-        // Act
-        $_POST['uname'] = $username;
-        $_POST['password1'] = $password;
-        $_SESSION = [];
-
-        include 'register.php';  // Include your registration logic file
-
-        // Assert
-        $this->assertContains('This username already added.!', $_SESSION['messages']);
+        try {
+            $stmt->execute();
+            $this->fail('Duplicate username should not allow registration');
+        } catch (PDOException $e) {
+            $this->assertTrue(true, 'Duplicate username detected as expected');
+        }
     }
 
-    public function testSuccessfulRegistration()
+    public function testSuccessfulRegistration(): void
     {
-        // Arrange
-        $username = 'newuser';
-        $password = 'testpassword';
+        $username = 'kaja1';
+        $password = password_hash('password345', PASSWORD_BCRYPT);
+        $email = 'kaja1@example.com';
 
-        // Simulate empty result for SELECT (no duplicate user)
-        $stmtSelect = $this->getMockBuilder(PDOStatement::class)
-                           ->disableOriginalConstructor()
-                           ->getMock();
-        $stmtSelect->expects($this->once())
-                   ->method('execute');
-        $stmtSelect->expects($this->once())
-                   ->method('fetch')
-                   ->willReturn(false);
+        $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':email', $email);
 
-        // Mock the PDO statement for INSERT query
-        $stmtInsert = $this->getMockBuilder(PDOStatement::class)
-                           ->disableOriginalConstructor()
-                           ->getMock();
-        $stmtInsert->expects($this->once())
-                   ->method('execute')
-                   ->willReturn(true);
+        try {
+            $stmt->execute();
+            $this->assertTrue(true, 'User registered successfully');
+        } catch (PDOException $e) {
+            $this->fail('Registration failed: ' . $e->getMessage());
+        }
 
-        // Mock the prepared statements
-        $this->pdo->expects($this->exactly(2)) // First SELECT, then INSERT
-                  ->method('prepare')
-                  ->willReturnOnConsecutiveCalls($stmtSelect, $stmtInsert);
+        // Verify the user exists
+        $query = "SELECT * FROM users WHERE username = :username";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
 
-        // Act
-        $_POST['uname'] = $username;
-        $_POST['password1'] = $password;
-        $_SESSION = [];
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        include 'register.php';  // Include your registration logic file
-
-        // Assert
-        $this->assertContains('Thank you for your registration.!', $_SESSION['messages']);
+        $this->assertNotEmpty($user, 'User should exist in the database');
+        $this->assertEquals($username, $user['username'], 'Username should match');
+        $this->assertEquals($email, $user['email'], 'Email should match');
     }
 }

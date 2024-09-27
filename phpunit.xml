@@ -5,4 +5,11 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <!-- Database connection for testing -->
+        <env name="DB_HOST" value="localhost"/>
+        <env name="DB_DATABASE" value="elibrary_test"/>
+        <env name="DB_USERNAME" value="root"/>
+        <env name="DB_PASSWORD" value=""/>
+    </php>
 </phpunit>

@@ -84,7 +84,7 @@ exit;
                 </div>
                 <div class="input-group">
                 <label for="email">Email</label>
-                <input type="text" id=email" name="email" placeholder="Enter Email" >
+                <input type="text" id="email" name="email" placeholder="Enter Email" >
                 <div class=" error "></div>
                 </div>
                 <div class="input-group ">
