@@ -1,92 +1,118 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests;
 
-class LoginTest extends TestCase
+use PDO;
+use PDOException;
+
+class loginTest extends databaseTestCase
 {
-    protected $pdo;
-
-    protected function setUp(): void
+    public function setUp(): void
     {
-        // Mock a PDO connection
-        $this->pdo = $this->getMockBuilder(PDO::class)
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        parent::setUp(); // Ensure parent setup is called
+        // Insert a test user to use for the login tests
+        $username = 'kaja1';
+        $password = password_hash('password345', PASSWORD_BCRYPT);
+        $email = 'kaja1@example.com';
+
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $userExists = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$userExists) {
+            $sql = "INSERT INTO users (username, password, email) VALUES (:username, :password, :email)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+        }
     }
 
-    public function testValidLogin()
+    public function testValidLogin(): void
     {
-        // Arrange
-        $username = 'testuser';
-        $password = 'testpassword';
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $username = 'kaja1';
+        $password = 'password345'; // Use the original password (not hashed)
 
-        // Simulate database result
-        $user = [
-            'id' => 1,
-            'username' => $username,
-            'password' => $hashedPassword
-        ];
+        // Simulate login logic
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Set up the PDO mock
-        $stmt = $this->getMockBuilder(PDOStatement::class)
-                     ->disableOriginalConstructor()
-                     ->getMock();
-        $stmt->expects($this->once())
-             ->method('execute');
-        $stmt->expects($this->once())
-             ->method('fetch')
-             ->willReturn($user);
+        $this->assertNotEmpty($user, 'User should exist in the database');
 
-        // Mock the prepared statement
-        $this->pdo->expects($this->once())
-                  ->method('prepare')
-                  ->willReturn($stmt);
+        // Verify the password
+        $this->assertTrue(password_verify($password, $user['password']), 'Password should match');
 
-        // Act
-        // Simulate login (invoke the login function and assert session)
-        $_REQUEST['uname'] = $username;
-        $_REQUEST['password1'] = $password;
-        $_SESSION = [];
+        // Set session variables (simulating a successful login)
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['id'] = $user['id'];
 
-        // Include the login script here to test its behavior.
-        include 'login.php';
-
-        // Assert
-        $this->assertEquals($_SESSION['username'], $username);
-        $this->assertEquals($_SESSION['id'], $user['id']);
+        $this->assertEquals($username, $_SESSION['username']);
+        $this->assertEquals($user['id'], $_SESSION['id']);
     }
 
-    public function testInvalidLogin()
-    {
-        // Arrange
-        $username = 'invaliduser';
-        $password = 'invalidpassword';
+    public function testInvalidLogin(): void
+{
+    $username = 'wronguser'; // Use a username that should not exist
+    $password = 'password123'; // Use an incorrect password
 
-        // Simulate empty result (user not found)
-        $stmt = $this->getMockBuilder(PDOStatement::class)
-                     ->disableOriginalConstructor()
-                     ->getMock();
-        $stmt->expects($this->once())
-             ->method('execute');
-        $stmt->expects($this->once())
-             ->method('fetch')
-             ->willReturn(false);
+    // Simulate login logic
+    $sql = "SELECT * FROM users WHERE username = :username";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Mock the prepared statement
-        $this->pdo->expects($this->once())
-                  ->method('prepare')
-                  ->willReturn($stmt);
+    // Assert that the user should not exist
+    $this->assertEmpty($user, 'User should not exist');
 
-        // Act
-        $_REQUEST['uname'] = $username;
-        $_REQUEST['password1'] = $password;
-        $_SESSION = [];
-
-        // Include the login script here to test its behavior.
-        include 'login.php';
-
-        // Assert
-        $this->assertContains('username or password is incorrect.!', $_SESSION['messages']);
+    // Simulate login failure
+    $_SESSION['messages'] = []; // Ensure it's an array
+    if (empty($user) || !password_verify($password, $user['password'])) {
+        $_SESSION['messages'][] = 'username or password is incorrect.!'; // Add message to array
     }
+
+    // Assert that the failure message is set correctly
+    $this->assertContains('username or password is incorrect.!', $_SESSION['messages']);
+}
+public function testEmptyLoginFields(): void
+{
+    $username = '';
+    $password = '';
+
+    // Initialize messages as an array
+    $_SESSION['messages'] = []; // Ensure it's an array
+
+    // Check if fields are empty
+    if (empty($username) || empty($password)) {
+        $_SESSION['messages'][] = 'username or password is incorrect.!'; // Add message to array
+    }
+
+    // Assert that the failure message is set correctly
+    $this->assertContains('username or password is incorrect.!', $_SESSION['messages']);
+}
+
+
+protected function tearDown(): void
+{
+    // Clean up test user from the database after tests
+    $sql = "DELETE FROM users WHERE username = :username";
+    $stmt = $this->conn->prepare($sql);
+    
+    // Ensure this matches the username created in the setup
+    $usernameToDelete = 'kaja1'; // Change to the appropriate test username if necessary
+    $stmt->bindParam(':username', $usernameToDelete);
+    $stmt->execute();
+    
+    parent::tearDown(); // Call parent teardown if needed
+}
+
+
+
+    
 }

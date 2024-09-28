@@ -16,8 +16,8 @@
       if (password_verify($pass, $result["password"])) {
         $_SESSION['id']=$result["id"];
         $_SESSION['username']=$uname;
-          
-        echo "<script>window.open('dashboard.php','_self')</script>";  
+        header('Location: dashboard.php'); 
+        //echo "<script>window.open('dashboard.php','_self')</script>";  
     } else {
       $_SESSION['messages'][]='username or password is incorrect.!';
       header('location: login.php');

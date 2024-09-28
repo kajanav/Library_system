@@ -5,12 +5,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'] ?? '';
     $author = $_POST['author'] ?? '';
     $year = $_POST['year'] ?? '';
+    $pdf = $_FILES['pdf']['name'] ?? '';
+
+     // Validate input fields
+     if (empty($title) || empty($author) || empty($year) || empty($pdfFile)) {
+        echo "All fields are required.";
+        return; // Prevent further execution
+    }
 
     // Check if the PDF file is uploaded
-    if (!empty($_FILES['pdf']['name'])) {
+    if (!empty($pdfFile)) {
         $targetDir = "uploads/";  // Directory where PDF files will be stored
-        $pdfFile = basename($_FILES["pdf"]["name"]);
-        $targetFilePath = $targetDir . $pdfFile;
+        $targetFilePath = $targetDir . basename($pdfFile);
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
         // Check if the file is a valid PDF
