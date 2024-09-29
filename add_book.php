@@ -7,30 +7,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $year = $_POST['year'] ?? '';
     $pdf = $_FILES['pdf']['name'] ?? '';
 
-     // Validate input fields
      if (empty($title) || empty($author) || empty($year) || empty($pdfFile)) {
-        echo "All fields are required.";
-        return; // Prevent further execution
+        header('Location: dashboard.php'); 
+        return; 
     }
 
-    // Check if the PDF file is uploaded
+    
     if (!empty($pdfFile)) {
-        $targetDir = "uploads/";  // Directory where PDF files will be stored
+        $targetDir = "uploads/";  
         $targetFilePath = $targetDir . basename($pdfFile);
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        // Check if the file is a valid PDF
+       
         if ($fileType == 'pdf') {
-            // Ensure the uploads directory exists
+       
             if (!is_dir($targetDir)) {
-                mkdir($targetDir, 0755, true); // Create directory if it does not exist
+                mkdir($targetDir, 0755, true); 
             }
 
-            // Move the uploaded file to the target directory
+            
             if (move_uploaded_file($_FILES["pdf"]["tmp_name"], $targetFilePath)) {
-                // Proceed to insert the book details and PDF path into the database
+              
                 if (!empty($title) && !empty($author) && !empty($year)) {
-                    // Prepare and execute the query
+                  
                     $sql = "INSERT INTO books (title, author, year, pdf) VALUES (:title, :author, :year, :pdf)";
                     $statement = $conn->prepare($sql);
                     $statement->bindParam(':title', $title);
@@ -40,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if ($statement->execute()) {
                         echo "New book added successfully";
+                       
                     } else {
                         echo "Error adding book";
                     }
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
             <div class="logo">
-          <h2>Wisdom Woods Library</h2>
+          <h2>ReadNet</h2>
         </div>
                 <ul class="nav nav-underline">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="dashboard.php">Home</a></li>

@@ -5,7 +5,7 @@
       session_start();
       $uname=trim($_REQUEST["uname"]);
       $pass=trim($_REQUEST["password1"]);
-      // $hash_default_salt = password_hash($pass, PASSWORD_DEFAULT); 
+       
   
       
       $sql="SELECT * FROM users WHERE username=:un";
@@ -17,7 +17,7 @@
         $_SESSION['id']=$result["id"];
         $_SESSION['username']=$uname;
         header('Location: dashboard.php'); 
-        //echo "<script>window.open('dashboard.php','_self')</script>";  
+        
     } else {
       $_SESSION['messages'][]='username or password is incorrect.!';
       header('location: login.php');
@@ -44,7 +44,7 @@
     <nav class="navr navr-inverse1">
       <div class="navdiv1">
       <div class="logo">
-          <h2>Wisdom Woods Library</h2>
+          <h2>ReadNet</h2>
         </div>
         <ul class="nav nav-underline">
 
@@ -74,6 +74,7 @@
         <button type="submit">Login</button>
         <br><br>
         <a href="register.php">Register for new account ?</a>
+        
     </form>
   </div>
   <footer class="footer">

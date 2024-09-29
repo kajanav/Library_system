@@ -235,7 +235,7 @@ h3{
   border-radius: 5px;
   cursor: pointer;
   font-size: 20px;
-  width: 50%;
+  width: 100%;
   
 }
 .create-post-btn:focus {

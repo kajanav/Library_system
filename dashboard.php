@@ -31,14 +31,12 @@ $books = $statement->fetchAll();
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
             <div class="logo">
-          <h2>Wisdom Woods Library</h2>
+          <h2>ReadNet</h2>
         </div>
                 <ul class="nav nav-underline">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="view_book.php">View Book</a></li>
-                    <li class="nav-item"><a class="nav-link" href="browse_books.php">Browse Books</a></li>
-                    <li class="nav-item"><a class="nav-link" href="return_books.php">Return Book</a></li>
                     <li class="nav-item" id="logout"><a class="nav-link" href="logout.php">Logout</a></li>
                 </ul>
             </div>
@@ -48,7 +46,7 @@ $books = $statement->fetchAll();
 
 <body>
 <h1>WELCOME <?php echo $username; ?>!</h1>
-<!-- Display success or error messages -->
+
 <?php if (isset($_GET['message'])): ?>
     <p class="success"><?php echo htmlspecialchars($_GET['message']); ?></p>
 <?php endif; ?>
@@ -56,7 +54,7 @@ $books = $statement->fetchAll();
 <?php if (isset($_GET['error'])): ?>
     <p class="error"><?php echo htmlspecialchars($_GET['error']); ?></p>
 <?php endif; ?>
-<!-- Display only if the user is not an admin -->
+
 <!-- <?php if (!$is_admin): ?> -->
     <div class="user-card">
         <div class="user-info">
@@ -79,7 +77,7 @@ $books = $statement->fetchAll();
                 <p><strong>Year:</strong> <?php echo $book['year']; ?></p>
                 <p><strong>Available:</strong> <?php echo $book['available'] ? 'Yes' : 'No'; ?></p>
                 
-                <!-- Display PDF link if it exists -->
+          
                 <?php if (!empty($book['pdf'])): ?>
                     <p><strong>PDF:</strong> <a href="uploads/<?php echo htmlspecialchars($book['pdf']); ?>" target="_blank">View PDF</a></p>
                 <?php else: ?>
@@ -91,7 +89,8 @@ $books = $statement->fetchAll();
             <a href="edit_book.php?id=<?php echo $book['id']; ?>">
     <button class="create-post-btn">Edit Book</button>
 </a>
-
+<br>
+<br>
 
                 <a href="delete_book.php?id=<?php echo $book['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?');">
              <button class="create-post-btn">Delete Book</button>

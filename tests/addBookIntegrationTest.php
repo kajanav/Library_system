@@ -24,18 +24,18 @@ class AddBookIntegrationTest extends TestCase
 
     public function testAdminCanAddBookAndViewIt(): void
     {
-        // Step 1: Log in as an admin user
+        
         session_start();
-        $_SESSION['username'] = 'adminUser'; // Simulating an admin login
-        $_SESSION['role'] = 'admin'; // Setting user role to admin
+        $_SESSION['username'] = 'adminUser'; 
+        $_SESSION['role'] = 'admin'; 
 
-        // Step 2: Navigate to add_book.php and simulate filling out the form
+        
         $bookTitle = 'New Test Book';
         $bookAuthor = 'Test Author';
         $bookYear = 2024;
         $bookPdf = 'path/to/newtestbook.pdf';
 
-        // Step 3: Insert book details into the database
+        
         $insertSql = "INSERT INTO books (title, author, year, pdf) VALUES (:title, :author, :year, :pdf)";
         $stmt = $this->conn->prepare($insertSql);
         $stmt->bindParam(':title', $bookTitle);
@@ -49,14 +49,14 @@ class AddBookIntegrationTest extends TestCase
             $this->fail('Failed to add book: ' . $e->getMessage());
         }
 
-        // Step 4: Verify that the book details are saved
+        
         $query = "SELECT * FROM books WHERE title = :title";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':title', $bookTitle);
         $stmt->execute();
         $book = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Step 5: Check that the book exists and the details match
+       
         $this->assertNotEmpty($book, 'Book should be saved in the database');
         $this->assertEquals($bookTitle, $book['title'], 'Book title should match');
         $this->assertEquals($bookAuthor, $book['author'], 'Book author should match');

@@ -10,7 +10,7 @@ if (isset($_POST['uname'])) {
    
    $isValid = true;
 
-   // Check fields are empty or not
+   
    if($username == '' ||  $password1 == ''){
       $isValid = false;
      $_SESSION['messages'][]='Please fill all required fields!';
@@ -18,7 +18,7 @@ header('location: register.php');
 exit;
    }
 
-// Insert records
+
    if($isValid){
     $sql="SELECT * FROM users WHERE username=:un";
     $stmt=$conn->prepare($sql);
@@ -60,7 +60,7 @@ exit;
         <nav class="navr navr-inverse1">
             <div class="navdiv1">
             <div class="logo">
-          <h2>Wisdom Woods Library</h2>
+          <h2>ReadNet</h2>
         </div>
                 <ul class="nav nav-underline">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>

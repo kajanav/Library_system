@@ -72,7 +72,7 @@ class addBookTest extends databaseTestCase
 
 public function testDuplicateBookTitle(): void
 {
-    $title = 'In Class Activity';
+    $title = 'Activity';
     $author = 'Another Author';
     $year = 2023;  // Use integer instead of string for year
     $pdf = 'Activity.pdf';

@@ -11,5 +11,17 @@
         <env name="DB_DATABASE" value="elibrary_test"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value=""/>
+        <env name="XDEBUG_MODE" value="coverage"/>
+         <ini name="error_reporting" value="-1"/>
     </php>
+
+  
+    <coverage>
+        <include>
+            <directory suffix=".php">C:\xampp\htdocs\elibirary_system\coverage</directory>
+        </include>
+    </coverage>
+
+
 </phpunit>
+

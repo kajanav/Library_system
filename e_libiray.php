@@ -59,18 +59,6 @@ try {
         MODIFY pdf VARCHAR(255) NOT NULL";
     $conn->exec($sql);
 
-    // Create the 'borrowers' table with foreign key reference to 'books'
-    $sql = "CREATE TABLE IF NOT EXISTS borrowers (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        name VARCHAR(255) NOT NULL,
-        book_id INT,
-        borrow_date DATE,
-        return_date DATE,
-        FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE SET NULL
-    )";
-    $conn->exec($sql);
-   
-
 
     echo "Tables created successfully";
 } catch (PDOException $e) {
@@ -129,4 +117,3 @@ try {
 $conn = null;
 
 ?>
-

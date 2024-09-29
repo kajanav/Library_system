@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Edit Profile</title>
+</head>
+<header>
+    <div class="main">
+        <nav class="navr navr-inverse1">
+            <div class="navdiv1">
+                <div class="logo">
+                    <h2>ReadNet</h2>
+                </div>
+                <ul class="nav nav-underline">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">Log Out</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<body>
+    <div class="container">
+                <form name="form" action="edit_profile.php" id="form" method="POST">
+            <h1>Edit Profile</h1>
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="uname" placeholder="Enter Username" value="appa" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" value="appa@example.com" >
+                <div class="error"></div>
+            </div>
+            <div class="input-group">
+                <label for="password">New Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter New Password" required>
+                <div class="error"></div>
+            </div>
+            <button type="submit" name="update">Update Profile</button>
+            <br><br>
+            <a href="login.php">Go back to profile</a>
+        </form>
+    </div>
+    <footer class="footer">
+        Software Testing - Group 06
+    </footer>
+</body>
+
+<script src="js/script.js"></script>
+</html>
